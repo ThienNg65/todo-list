@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tests/test-manager.js)",
+      "Bash(tests/README.md)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

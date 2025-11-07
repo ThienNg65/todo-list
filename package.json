@@ -7,7 +7,17 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "test": "playwright test",
+    "test:ui": "playwright test --grep @ui",
+    "test:logic": "playwright test --grep @logic",
+    "test:integration": "playwright test --grep @integration",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:critical": "playwright test --grep @critical",
+    "test:fast": "playwright test --grep @fast",
+    "test:smart": "node tests/test-manager.js",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug"
   },
   "dependencies": {
     "nuxt": "^4.2.0",
