@@ -20,11 +20,21 @@
     "test:debug": "playwright test --debug"
   },
   "dependencies": {
-    "nuxt": "^4.2.0",
-    "vue": "^3.5.22",
-    "vue-router": "^4.6.3"
+    "nuxt": "3.10.3",
+    "vue": "3.4.21",
+    "vue-router": "4.3.0"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.14.0"
+    "@nuxtjs/tailwindcss": "6.11.4",
+    "@playwright/test": "1.42.1"
+  },
+  "overrides": {
+    "@vue-macros/common": "1.10.2",
+    "nitropack": "2.9.6",
+    "undici": "5.28.4",
+    "unplugin-utils": "0.2.3"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x"
   }
 }
