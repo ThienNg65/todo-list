@@ -742,6 +742,57 @@ writes code, runs tests.
 
 ---
 
+## Demo Execution Guide 🎮
+
+### How to Coordinate the Live Demos
+
+**Prerequisites:**
+- Dev server running: `npm run dev` (port 3000)
+- 6 demo branches ready: `demo/01-code-writer` through `demo/06-manager`
+- Each branch has `demo-XX-prompt.md` with AI instructions
+- Playwright configured with headed mode (`headless: false`, `slowMo: 800`)
+
+**Demo Workflow (Per Branch):**
+
+<div class="columns">
+<div>
+
+**Step 1: Sonnet Coordinator**
+```
+git checkout demo/XX-xxx
+
+Launch Sonnet agent:
+- Check current tests
+- Run tests to identify issues
+- Report: PASS or FAIL with details
+```
+
+</div>
+<div>
+
+**Step 2: Haiku Executor**
+```
+If tests FAIL:
+
+Launch Haiku agent:
+- Read demo-XX-prompt.md
+- Follow instructions to fix tests
+- Run tests to verify
+- Report: Success or failure
+```
+
+</div>
+</div>
+
+**Manual Coordination:**
+1. **Switch branch**: `git checkout demo/XX-xxx`
+2. **Launch Sonnet**: Let it run and report test status
+3. **If failures exist**: Launch Haiku with prompt guidance
+4. **Watch live**: Browser visible, 800ms slowMo for audience
+5. **Next demo**: Reset changes (`git reset --hard`), repeat
+
+---
+
 ## Real Numbers 📊
 
 ### What Teams Actually Get
