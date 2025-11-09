@@ -319,9 +319,9 @@ You're a **mechanic** spending half the week
 </div>
 
 <div class="icon-box icon-box-green">
-<div style="font-size: 2.5em;">🧠</div>
-<strong>#6: Manager</strong>
-"I run everything"
+<div style="font-size: 2.5em;">🌉</div>
+<strong>#6: MCP Bridge</strong>
+"I can RUN tests, not just write"
 </div>
 
 </div>
@@ -642,45 +642,52 @@ AI: [Random actions]:
 
 ---
 
-## AI #6: Manager 🧠 (Ruler)
+## AI #6: Playwright MCP Bridge 🌉
 
 <div class="columns">
 <div>
 
-**The Problem:**
+**WITHOUT MCP:**
 
-📊 You have: **500 tests**
-⏰ Run all: **2 hours**
-💻 Change: **1 line CSS**
+```
+You: "Write me a test for login"
+AI: [writes test code]
+You: [manually run it]
+You: [check results]
+You: "Test failed, fix it"
+AI: [writes more code]
+You: [run again...]
+```
 
-**Question:**
-Run all 500? (slow) 🐌
-Or guess? (risky) 🎲
+🤦 You're the middleman
 
 </div>
 <div>
 
-**AI Solution:**
+**WITH Playwright MCP:**
 
 ```
-Commit: "fix: header align"
+You: "Test the login flow"
 
-AI analyzes:
-  📁 Changed: header.css
-  🔍 Affected: 3 components
-  🎯 Related: 47 tests
-  
-AI runs: 47 tests (12 min)
+AI uses MCP to:
+  🔍 Discover existing tests
+  ▶️  Run tests directly
+  📊 Analyze results
+  🔧 Fix failures
+  ✅ Re-run to verify
 
-3 fail:
-  ✅ AI fixes 2 auto
-  👁️ AI flags 1 for review
-
-Total: 15 min vs 2+ hours
+AI: "Done. 2 tests passed."
 ```
+
+🎯 **AI is autonomous**
 
 </div>
 </div>
+
+**Key Difference:** MCP lets Claude **RUN** and **INTERACT** with Playwright, not just generate code.
+
+> 👤 → 🤖 → 🎭 → 💻
+> **You** → **Claude** → **Playwright** → **App**
 
 ---
 
@@ -1099,9 +1106,9 @@ UX testing<br>
 </div>
 
 <div class="icon-box icon-box-green">
-🧠 <strong>#6: Manager</strong><br>
-Full auto<br>
-→ Katalon, Sauce Labs
+🌉 <strong>#6: MCP Bridge</strong><br>
+AI runs tests directly<br>
+→ Playwright MCP
 </div>
 
 </div>
