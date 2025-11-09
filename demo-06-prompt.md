@@ -104,6 +104,9 @@ Provide a summary showing:
 - Total tests discovered
 - Tests executed
 - Pass/fail status
+- **Root cause analysis**: For each failure, clearly state whether it was:
+  - A **real bug** in the application code, OR
+  - A **test setup issue** (timing, race conditions, wrong selectors, insufficient waits, etc.)
 - What you fixed (if anything)
 - **Key point**: Emphasize how MCP enabled you to do all this autonomously
 
@@ -116,6 +119,7 @@ Throughout your work, **clearly distinguish** which tool you're using:
 - ✅ "Navigating to the app via MCP browser tools..."
 - ✅ "MCP browser snapshot shows [description of what you see]..."
 - ✅ "Based on MCP browser investigation, the issue is [explanation]..."
+- ✅ **"This is a [real bug / test setup issue] because [reasoning]..."**
 - ✅ "Re-running tests via Bash to verify fix..."
 
 ## Success Criteria
