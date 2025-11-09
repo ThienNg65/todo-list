@@ -17,7 +17,8 @@ test.describe('Smart Test Selection Demo', () => {
   test('quick smoke test - always runs first @smoke @critical', async ({ page }) => {
     // AI: This test ALWAYS runs first to catch major breakage
     await page.goto('/');
-    await expect(page.locator('h1')).toContainText('To-Do List');
+    // INTENTIONALLY BROKEN: Wrong text to demonstrate MCP fix workflow
+    await expect(page.locator('h1')).toContainText('Todo App');
 
     // Verify app is at least rendering
     await expect(page.locator('input[placeholder="Add a new task..."]')).toBeVisible();

@@ -17,6 +17,8 @@ This showcases the **MCP advantage**: Claude can actively participate in testing
 
 ## Your Task as AI
 
+**NOTE:** One test is intentionally broken to demonstrate the full MCP workflow (discover → run → fail → fix → re-run).
+
 You have access to Playwright MCP tools. Use them to demonstrate the complete testing workflow:
 
 ### Step 1: Discovery Phase
