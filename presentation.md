@@ -133,7 +133,7 @@ style: |
 
 </div>
 
-**Your Name**
+**Axon Active**
 **November 2025**
 
 ---
@@ -891,7 +891,7 @@ writes code, runs tests.
 
 Save 38% = **45.6 hours/week** freed up
 
-= **1.14 full-time people** worth of capacity
+= **~1 full-time person** worth of capacity
 
 = **~$60K+/year** in value
 
@@ -899,7 +899,7 @@ Save 38% = **45.6 hours/week** freed up
 
 <div style="font-size: 1.3em; color: #10B981; font-weight: bold;">
 
-**MCP pays for itself in 1-2 months** 📈
+**AI & MCP pay for themselves in 1-2 months** 📈
 
 </div>
 
@@ -1136,10 +1136,10 @@ for **no reason**
 
 ---
 
-## Cheat Sheet 📋
+## Market Alternatives 🔄
 
 <div style="text-align: center; margin-bottom: 1em; font-size: 0.9em; color: #666;">
-<strong>Foundation:</strong> Playwright MCP enables all patterns below
+<em>Commercial tools offering similar capabilities</em>
 </div>
 
 <div class="icon-grid">
@@ -1153,7 +1153,7 @@ Quick wins<br>
 <div class="icon-box icon-box-purple">
 👀 <strong>#2: Explorer</strong><br>
 Coverage<br>
-→ Mabl, Applitools
+→ Applitools, Mabl
 </div>
 
 <div class="icon-box icon-box-red">
@@ -1172,6 +1172,12 @@ Resilience<br>
 😇 <strong>#5: User Sim</strong><br>
 UX testing<br>
 → test.ai, Rainforest
+</div>
+
+<div class="icon-box icon-box-green">
+🚀 <strong>#6: All-in-One</strong><br>
+Autonomous platforms<br>
+→ TestSprite, Mabl, Katalon
 </div>
 
 </div>
