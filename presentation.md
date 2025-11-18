@@ -515,7 +515,7 @@ test('login fails', async ({ page }) => {
 
 ---
 
-## AI #1: Time Saved 💰
+## Pattern #1: Time Saved 💰
 
 <div style="text-align: center; margin: 3em 0;">
 
@@ -720,7 +720,7 @@ AI: [Tests with]:
 
 ---
 
-## AI #5: Naive User 😇
+## Pattern #5: Naive User 😇
 
 ### Tests Like Your Grandparent
 
@@ -766,7 +766,7 @@ Click submit first
 
 ---
 
-## AI #5: What It Finds 🔍
+## Pattern #5: What It Finds 🔍
 
 ```
 You: "Test login like confused user"
@@ -784,204 +784,6 @@ AI: [Random actions]:
     - Spaces in email not trimmed
     - Tab order is backwards
 ```
-
----
-
-## AI #6: Playwright MCP Bridge 🌉
-
-<div class="columns">
-<div>
-
-**WITHOUT MCP:**
-
-```
-You: "Write me a test for login"
-AI: [writes test code]
-You: [manually run it]
-You: [check results]
-You: "Test failed, fix it"
-AI: [writes more code]
-You: [run again...]
-```
-
-🤦 You're the middleman
-
-</div>
-<div>
-
-**WITH Playwright MCP:**
-
-```
-You: "Test the login flow"
-
-AI uses MCP to:
-  🔍 Discover existing tests
-  ▶️  Run tests directly
-  📊 Analyze results
-  🔧 Fix failures
-  ✅ Re-run to verify
-
-AI: "Done. 2 tests passed."
-```
-
-🎯 **AI is autonomous**
-
-</div>
-</div>
-
-**Key Difference:** MCP lets Claude **RUN** and **INTERACT** with Playwright, not just generate code.
-
-> 👤 → 🤖 → 🎭 → 💻
-> **You** → **Claude** → **Playwright** → **App**
-
----
-
-## Playwright MCP: Like Talking to a Robot 🤖
-
-<div class="columns">
-<div>
-
-**Think of it like this:**
-
-You have a robot that controls your browser.
-
-Instead of pressing buttons yourself, you **text the robot** what to do.
-
-```
-You: "Go to GitHub trending
-      and click the first repo"
-
-Robot: "Done! I'm now on
-        traefik/traefik page"
-```
-
-That's MCP. **Messages** → **Actions**
-
-</div>
-<div>
-
-**How You Talk to the Robot:**
-
-```json
-{
-  "method": "tools/call",
-  "params": {
-    "name": "browser_run_code",
-    "arguments": {
-      "code": "await page.goto('...');\n
-               await page.click('...');"
-    }
-  }
-}
-```
-
-Robot understands JSON.
-Claude speaks JSON fluently.
-**You just speak English.**
-
-</div>
-</div>
-
----
-
-## Live Example: Chain 5 Actions in 1 Message 🎯
-
-<div style="font-size: 0.85em;">
-
-**What we just did in Postman (MCP client):**
-
-```javascript
-// Navigate to GitHub Trending
-await page.goto('https://github.com/trending?spoken_language_code=en');
-
-// Wait for trending list to load
-await page.waitForSelector('article h2 a');
-
-// Get first trending repo name for logging
-const firstRepo = await page.locator('article h2 a').first().textContent();
-console.log(`Clicking on: ${firstRepo}`);
-
-// Click the first trending repository
-await page.locator('article h2 a').first().click();
-
-// Wait for navigation and log result
-await page.waitForLoadState('networkidle');
-console.log(`Navigated to: ${page.url()}`);
-```
-
-**Result:** `Navigated to: https://github.com/traefik/traefik`
-
-</div>
-
-<div style="text-align: center; margin-top: 1em; font-size: 1.1em;">
-
-**One message. Five actions. Zero human clicking.** ✨
-
-</div>
-
----
-
-## How MCP Works Under the Hood 🔍
-
-### Every Request Includes Tool Definitions
-
-<div class="columns">
-<div>
-
-**The Mechanism:**
-
-1️⃣ **Tool Schemas Sent**
-   - Every AI request includes all tool definitions
-   - JSON schemas describe capabilities
-
-2️⃣ **Model Decides**
-   - AI reads available tools
-   - Chooses which to use
-   - Calls tools autonomously
-
-3️⃣ **Tools Execute**
-   - MCP server runs Playwright
-   - Returns results to AI
-   - AI continues workflow
-
-</div>
-<div>
-
-**Example Tool Schema:**
-
-```json
-{
-  "name": "browser_click",
-  "description": "Click element",
-  "parameters": {
-    "element": "string",
-    "ref": "string",
-    "button": "left|right|middle"
-  }
-}
-```
-
-</div>
-</div>
-
----
-
-## MCP Token Costs 📊
-
-<div class="metric-box" style="font-size: 0.95em;">
-
-**Total Context: 200k tokens**
-
-| Component | Tokens | % | What It Is |
-|-----------|--------|---|------------|
-| 🧠 **System prompt** | 6.3k | 3% | Core AI instructions |
-| 🔧 **System tools** | 13.4k | 7% | Built-in Claude tools (Read, Write, Bash, etc.) |
-| 🌉 **MCP tools** | 15.0k | **8%** | **Playwright MCP (22 tools)** |
-| 💬 **Messages** | 90k | 45% | Your conversation history |
-| 🆓 **Free space** | 31k | 15% | Available for new content |
-| 🔄 **Auto-compact** | 45k | 22% | Buffer for context management |
-
-</div>
 
 ---
 
@@ -1180,25 +982,25 @@ Show team
 
 <div class="icon-box icon-box-blue">
 <div style="font-size: 2em;">📅 Month 1</div>
-<strong>AI #1: Code Writer</strong>
+<strong>Pattern #1: Code Writer</strong>
 Save 5 hrs/week
 </div>
 
 <div class="icon-box icon-box-purple">
 <div style="font-size: 2em;">📅 Month 2</div>
-<strong>Add AI #2: Explorer</strong>
+<strong>Add Pattern #2: Explorer</strong>
 Find coverage gaps
 </div>
 
 <div class="icon-box icon-box-orange">
 <div style="font-size: 2em;">📅 Month 3</div>
-<strong>Add AI #4: Chaos</strong>
+<strong>Add Pattern #4: Chaos</strong>
 Kill flaky tests
 </div>
 
 <div class="icon-box icon-box-green" style="grid-column: 1 / -1;">
 <div style="font-size: 2em;">📅 Month 4+</div>
-<strong>Add AI #6: Manager</strong>
+<strong>All Patterns Combined</strong>
 Full automation - 80% coverage
 </div>
 
@@ -1336,6 +1138,10 @@ for **no reason**
 
 ## Cheat Sheet 📋
 
+<div style="text-align: center; margin-bottom: 1em; font-size: 0.9em; color: #666;">
+<strong>Foundation:</strong> Playwright MCP enables all patterns below
+</div>
+
 <div class="icon-grid">
 
 <div class="icon-box icon-box-blue">
@@ -1366,12 +1172,6 @@ Resilience<br>
 😇 <strong>#5: User Sim</strong><br>
 UX testing<br>
 → test.ai, Rainforest
-</div>
-
-<div class="icon-box icon-box-green">
-🌉 <strong>#6: MCP Bridge</strong><br>
-AI runs tests directly<br>
-→ Playwright MCP
 </div>
 
 </div>
