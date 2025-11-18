@@ -272,9 +272,160 @@ You're a **mechanic** spending half the week
 
 ---
 
+## Playwright MCP: Like Talking to a Robot 🤖
+
+<div class="columns">
+<div>
+
+**Think of it like this:**
+
+You have a robot that controls your browser.
+
+Instead of pressing buttons yourself, you **text the robot** what to do.
+
+```
+You: "Go to GitHub trending
+      and click the first repo"
+
+Robot: "Done! I'm now on
+        traefik/traefik page"
+```
+
+That's MCP. **Messages** → **Actions**
+
+</div>
+<div>
+
+**How You Talk to the Robot:**
+
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "browser_run_code",
+    "arguments": {
+      "code": "await page.goto('...');\n
+               await page.click('...');"
+    }
+  }
+}
+```
+
+Robot understands JSON.
+Claude speaks JSON fluently.
+**You just speak English.**
+
+</div>
+</div>
+
+---
+
+## Live Example: Chain 5 Actions in 1 Message 🎯
+
+<div style="font-size: 0.85em;">
+
+```javascript
+// Navigate to GitHub Trending
+await page.goto('https://github.com/trending?spoken_language_code=en');
+
+// Wait for trending list to load
+await page.waitForSelector('article h2 a');
+
+// Get first trending repo name for logging
+const firstRepo = await page.locator('article h2 a').first().textContent();
+console.log(`Clicking on: ${firstRepo}`);
+
+// Click the first trending repository
+await page.locator('article h2 a').first().click();
+
+// Wait for navigation and log result
+await page.waitForLoadState('networkidle');
+console.log(`Navigated to: ${page.url()}`);
+```
+
+</div>
+
+---
+
+## How MCP Works Under the Hood 🔍
+
+### Every Request Includes Tool Definitions
+
+<div class="columns">
+<div>
+
+**The Mechanism:**
+
+1️⃣ **Tool Schemas Sent**: Every AI request includes all tool definitions
+
+2️⃣ **Model Decides**: AI reads available tools, chooses which to use
+
+3️⃣ **Tools Execute**: MCP server runs Playwright, returns results to AI to continue workflow
+
+</div>
+<div>
+
+**Example Tool Schema:**
+
+```json
+{
+  "name": "browser_click",
+  "description": "Click element",
+  "parameters": { 
+    "element": "string",
+    "ref": "string",
+    "button": "left|right|middle"
+  }
+}
+```
+
+</div>
+</div>
+
+---
+
+## MCP Token Costs 📊
+
+<div class="metric-box" style="font-size: 0.95em;">
+
+**Total Context: 200k tokens**
+
+| Component | Tokens | % | What It Is |
+|-----------|--------|---|------------|
+| 🧠 **System prompt** | 6.3k | 3% | Core AI instructions |
+| 🔧 **System tools** | 13.4k | 7% | Built-in Claude tools (Read, Write, Bash, etc.) |
+| 🌉 **MCP tools** | 15.0k | **8%** | **Playwright MCP (22 tools)** |
+| 💬 **Messages** | 90k | 45% | Your conversation history |
+| 🆓 **Free space** | 31k | 15% | Available for new content |
+| 🔄 **Auto-compact** | 45k | 22% | Buffer for context management |
+
+</div>
+
+---
+
 <!-- _class: lead -->
 
-# Meet Your 6 AI Teammates
+# Now You Know the Foundation 🎓
+
+<div class="emoji-large">
+
+✅
+
+</div>
+
+<div style="font-size: 1.3em; margin: 2em;">
+
+You understand **MCP** - the bridge between AI and browser.
+
+Now let's see **5 powerful patterns** for using it.
+
+</div>
+
+---
+
+<!-- _class: lead -->
+
+# 5 Patterns for Using MCP
 
 <div class="emoji-large">
 
@@ -284,51 +435,45 @@ You're a **mechanic** spending half the week
 
 ---
 
-## 6 AI Teammates
+## 5 Patterns for Using MCP
 
 <div class="icon-grid" style="margin: 1em 0;">
 
 <div class="icon-box icon-box-blue">
 <div style="font-size: 2.5em;">🔧</div>
-<strong>#1: Code Writer</strong>
+<strong>Pattern #1: Code Writer</strong>
 "You describe, I write"
 </div>
 
 <div class="icon-box icon-box-purple">
 <div style="font-size: 2.5em;">👀</div>
-<strong>#2: Explorer</strong>
+<strong>Pattern #2: Explorer</strong>
 "I find what to test"
 </div>
 
 <div class="icon-box icon-box-red">
 <div style="font-size: 2.5em;">👊</div>
-<strong>#3: Breaker</strong>
+<strong>Pattern #3: Breaker</strong>
 "I break 1000 ways"
 </div>
 
 <div class="icon-box icon-box-orange">
 <div style="font-size: 2.5em;">🌀</div>
-<strong>#4: Chaos Maker</strong>
+<strong>Pattern #4: Chaos Maker</strong>
 "I find flaky tests"
 </div>
 
 <div class="icon-box icon-box-yellow">
 <div style="font-size: 2.5em;">😇</div>
-<strong>#5: Naive User</strong>
+<strong>Pattern #5: Naive User</strong>
 "Like your grandma"
-</div>
-
-<div class="icon-box icon-box-green">
-<div style="font-size: 2.5em;">🌉</div>
-<strong>#6: MCP Bridge</strong>
-"I can RUN tests, not just write"
 </div>
 
 </div>
 
 ---
 
-## AI #1: Code Writer 🔧
+## Pattern #1: Code Writer 🔧
 
 ### Your Starting Point
 
@@ -398,7 +543,7 @@ test('login fails', async ({ page }) => {
 
 ---
 
-## AI #2: Explorer 👀
+## Pattern #2: Explorer 👀
 
 ### Finds What You Missed
 
@@ -446,7 +591,7 @@ AI: [Clicks everything 5 min]
 
 ---
 
-## AI #3: Breaker 👊
+## Pattern #3: Breaker 👊
 
 ### Tries to Break Everything
 
@@ -494,7 +639,7 @@ await page.fill(
 
 ---
 
-## AI #3: Breaker 👊 (Results 🎯)
+## Pattern #3: Breaker 👊 (Results 🎯)
 
 <div style="text-align: center; margin: 3em 0;">
 
@@ -533,7 +678,7 @@ vs
 
 ---
 
-## AI #4: Chaos Maker 🌀
+## Pattern #4: Chaos Maker 🌀
 
 <div class="columns">
 <div>
@@ -691,6 +836,155 @@ AI: "Done. 2 tests passed."
 
 ---
 
+## Playwright MCP: Like Talking to a Robot 🤖
+
+<div class="columns">
+<div>
+
+**Think of it like this:**
+
+You have a robot that controls your browser.
+
+Instead of pressing buttons yourself, you **text the robot** what to do.
+
+```
+You: "Go to GitHub trending
+      and click the first repo"
+
+Robot: "Done! I'm now on
+        traefik/traefik page"
+```
+
+That's MCP. **Messages** → **Actions**
+
+</div>
+<div>
+
+**How You Talk to the Robot:**
+
+```json
+{
+  "method": "tools/call",
+  "params": {
+    "name": "browser_run_code",
+    "arguments": {
+      "code": "await page.goto('...');\n
+               await page.click('...');"
+    }
+  }
+}
+```
+
+Robot understands JSON.
+Claude speaks JSON fluently.
+**You just speak English.**
+
+</div>
+</div>
+
+---
+
+## Live Example: Chain 5 Actions in 1 Message 🎯
+
+<div style="font-size: 0.85em;">
+
+**What we just did in Postman (MCP client):**
+
+```javascript
+// Navigate to GitHub Trending
+await page.goto('https://github.com/trending?spoken_language_code=en');
+
+// Wait for trending list to load
+await page.waitForSelector('article h2 a');
+
+// Get first trending repo name for logging
+const firstRepo = await page.locator('article h2 a').first().textContent();
+console.log(`Clicking on: ${firstRepo}`);
+
+// Click the first trending repository
+await page.locator('article h2 a').first().click();
+
+// Wait for navigation and log result
+await page.waitForLoadState('networkidle');
+console.log(`Navigated to: ${page.url()}`);
+```
+
+**Result:** `Navigated to: https://github.com/traefik/traefik`
+
+</div>
+
+<div style="text-align: center; margin-top: 1em; font-size: 1.1em;">
+
+**One message. Five actions. Zero human clicking.** ✨
+
+</div>
+
+---
+
+## How MCP Works Under the Hood 🔍
+
+### Every Request Includes Tool Definitions
+
+<div class="columns">
+<div>
+
+**The Mechanism:**
+
+1️⃣ **Tool Schemas Sent**
+   - Every AI request includes all tool definitions
+   - JSON schemas describe capabilities
+
+2️⃣ **Model Decides**
+   - AI reads available tools
+   - Chooses which to use
+   - Calls tools autonomously
+
+3️⃣ **Tools Execute**
+   - MCP server runs Playwright
+   - Returns results to AI
+   - AI continues workflow
+
+</div>
+<div>
+
+**Example Tool Schema:**
+
+```json
+{
+  "name": "browser_click",
+  "description": "Click element",
+  "parameters": {
+    "element": "string",
+    "ref": "string",
+    "button": "left|right|middle"
+  }
+}
+```
+
+</div>
+</div>
+
+---
+
+## MCP Token Costs 📊
+
+<div class="metric-box" style="font-size: 0.95em;">
+
+**Total Context: 200k tokens**
+
+| Component | Tokens | % | What It Is |
+|-----------|--------|---|------------|
+| 🧠 **System prompt** | 6.3k | 3% | Core AI instructions |
+| 🔧 **System tools** | 13.4k | 7% | Built-in Claude tools (Read, Write, Bash, etc.) |
+| 🌉 **MCP tools** | 15.0k | **8%** | **Playwright MCP (22 tools)** |
+| 💬 **Messages** | 90k | 45% | Your conversation history |
+| 🆓 **Free space** | 31k | 15% | Available for new content |
+| 🔄 **Auto-compact** | 45k | 22% | Buffer for context management |
+
+</div>
+
+---
+
 <!-- _class: lead -->
 
 # Live Demo 🎬
@@ -759,42 +1053,11 @@ writes code, runs tests.
 - Each branch has `demo-XX-prompt.md` with AI instructions
 - Playwright configured with headed mode (`headless: false`, `slowMo: 800`)
 
-**Demo Workflow (Per Branch):**
-
-<div class="columns">
-<div>
-
-**Step 1: Sonnet Coordinator**
-```
-git checkout demo/XX-xxx
-
-Launch Sonnet agent:
-- Check current tests
-- Run tests to identify issues
-- Report: PASS or FAIL with details
-```
-
-</div>
-<div>
-
-**Step 2: Haiku Executor**
-```
-If tests FAIL:
-
-Launch Haiku agent:
-- Read demo-XX-prompt.md
-- Follow instructions to fix tests
-- Run tests to verify
-- Report: Success or failure
-```
-
-</div>
-</div>
 
 **Manual Coordination:**
 1. **Switch branch**: `git checkout demo/XX-xxx`
 2. **Launch Sonnet**: Let it run and report test status
-3. **If failures exist**: Launch Haiku with prompt guidance
+3. **If failures exist**: Launch Sonnet with prompt guidance
 4. **Watch live**: Browser visible, 800ms slowMo for audience
 5. **Next demo**: Reset changes (`git reset --hard`), repeat
 
@@ -809,7 +1072,7 @@ Launch Haiku agent:
 |📝 Write test  |30 min                                |3 min                                   |<span class="highlight-green">10x faster</span>     |
 |🔧 Fix selector|15 min                                |Auto                                    |<span class="highlight-green">100% automated</span> |
 |🎲 Find flaky  |Never                                 |Auto                                    |<span class="highlight-green">Catch before CI</span>|
-|🔍 Debug fail  |45 min                                |5 min                                   |<span class="highlight-green">9x faster</span>      |
+|🔍 Debug fail  |15 min                                |5 min                                   |<span class="highlight-green">3x faster</span>      |
 |⏰ Maintenance |<span class="highlight-red">50%</span>|<span class="highlight-green"><10%</span>|<span class="highlight-green">40%+ saved</span>      |
 
 ---
