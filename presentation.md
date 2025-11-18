@@ -1001,7 +1001,7 @@ Kill flaky tests
 <div class="icon-box icon-box-green" style="grid-column: 1 / -1;">
 <div style="font-size: 2em;">📅 Month 4+</div>
 <strong>All Patterns Combined</strong>
-Full automation - 80% coverage
+Full automation
 </div>
 
 </div>
@@ -1153,7 +1153,7 @@ Quick wins<br>
 <div class="icon-box icon-box-purple">
 👀 <strong>#2: Explorer</strong><br>
 Coverage<br>
-→ Applitools, Mabl
+→ Applitools
 </div>
 
 <div class="icon-box icon-box-red">
