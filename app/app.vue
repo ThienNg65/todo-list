@@ -186,7 +186,7 @@ function deleteTask(id: number) {
 }
 
 function clearCompleted() {
-  tasks.value = tasks.value.filter(t => !t.completed)
+  tasks.value = []
 }
 
 function clearAll() {
